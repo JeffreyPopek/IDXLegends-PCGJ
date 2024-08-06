@@ -16,7 +16,14 @@ public class ResourceManager : MonoBehaviour
     
     // Meats
     public float _LBFattyMeat;
-    public int _currentSausage;
+    public float _LBLeanMeat;
+    public float _LBRichMeat;
+
+    public int _numBoiledKielbasa;
+    public int _numGrilledKielbasa;
+    public int _numSmokedKielbasa;
+    public int _numDryAgedKielbasa;
+    
 
     #endregion
     
@@ -44,8 +51,15 @@ public class ResourceManager : MonoBehaviour
         // Get data from PlayerData scriptable object
         _currentDay = _playerData.Day;
         _currentMoney = _playerData.Money;
+        
         _LBFattyMeat = _playerData.LBFatty;
-        _currentSausage = _playerData.Sausages;
+        _LBLeanMeat = _playerData.LBLean;
+        _LBRichMeat = _playerData.LBRich;
+        
+        _numBoiledKielbasa = _playerData.BoiledKielbasa;
+        _numGrilledKielbasa = _playerData.GrilledKielbasa;
+        _numSmokedKielbasa = _playerData.SmokedKielbasa;
+        _numDryAgedKielbasa = _playerData.DryAgedKielbasa;
     }
 
     public void UpdatePlayerData()
@@ -53,7 +67,16 @@ public class ResourceManager : MonoBehaviour
         // Set data in PlayerData scriptable object
         _playerData.Day = _currentDay;
         _playerData.Money = _currentMoney;
+        
         _playerData.LBFatty = _LBFattyMeat;
-        _playerData.Sausages = _currentSausage;
+        _playerData.LBLean = _LBLeanMeat;
+        _playerData.LBRich = _LBRichMeat;
+        
+        _playerData.BoiledKielbasa = _numBoiledKielbasa;
+        _playerData.GrilledKielbasa = _numGrilledKielbasa;
+        _playerData.SmokedKielbasa = _numSmokedKielbasa;
+        _playerData.DryAgedKielbasa = _numDryAgedKielbasa;
+        
+        TextManager.Instance.UpdateUI();
     }
 }

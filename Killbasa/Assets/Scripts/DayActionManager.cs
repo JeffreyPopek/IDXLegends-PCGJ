@@ -2,28 +2,51 @@ using UnityEngine;
 
 public class DayActionManager : MonoBehaviour
 {
-    public void MakeSausage()
+    public void MakeBoiledKielbasa()
     {
-        if (ResourceManager.Instance._LBFattyMeat >= 10)
+        if (ResourceManager.Instance._LBFattyMeat >= 100)
         {
-            ResourceManager.Instance._LBFattyMeat -= 10;
-            ResourceManager.Instance._currentSausage++;
+            ResourceManager.Instance._LBFattyMeat -= 100;
+            ResourceManager.Instance._numBoiledKielbasa++;
             
-            TextManager.Instance.UpdateUI();
+            ResourceManager.Instance.UpdatePlayerData();
         }
     }
     
-    public void SellSausage()
+    public void MakeGrilledKielbasa()
     {
-        //Debug.Log(ResourceManager.Instance._currentSausage);
-        if (ResourceManager.Instance._currentSausage >= 1)
+        if (ResourceManager.Instance._LBFattyMeat >= 40 && ResourceManager.Instance._LBLeanMeat >= 60)
         {
-            ResourceManager.Instance._currentSausage--;
-            ResourceManager.Instance._currentMoney++;
+            ResourceManager.Instance._LBFattyMeat -= 40;
+            ResourceManager.Instance._LBLeanMeat -= 60;
+            ResourceManager.Instance._numGrilledKielbasa++;
             
-            TextManager.Instance.UpdateUI();
+            ResourceManager.Instance.UpdatePlayerData();
         }
     }
     
+    public void MakeSmokedKielbasa()
+    {
+        if (ResourceManager.Instance._LBFattyMeat >= 20 && ResourceManager.Instance._LBRichMeat >= 80)
+        {
+            ResourceManager.Instance._LBFattyMeat -= 20;
+            ResourceManager.Instance._LBFattyMeat -= 80;
+            ResourceManager.Instance._numSmokedKielbasa++;
+            
+            ResourceManager.Instance.UpdatePlayerData();
+        }
+    }
     
+    public void MakeDryAgedKielbasa()
+    {
+        if (ResourceManager.Instance._LBFattyMeat >= 20 && ResourceManager.Instance._LBLeanMeat >= 40 && ResourceManager.Instance._LBRichMeat >= 40)
+        {
+            ResourceManager.Instance._LBFattyMeat -= 20;
+            ResourceManager.Instance._LBLeanMeat -= 40;
+            ResourceManager.Instance._LBRichMeat -= 40;
+            ResourceManager.Instance._numDryAgedKielbasa++;
+            
+            ResourceManager.Instance.UpdatePlayerData();
+        }
+    }
 }

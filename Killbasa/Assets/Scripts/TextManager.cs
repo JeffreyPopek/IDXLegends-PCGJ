@@ -52,6 +52,5 @@ public class TextManager : MonoBehaviour
         moneyAmount.text = "$" + ResourceManager.Instance._currentMoney;
         fattyMeatAmount.text = ResourceManager.Instance._LBFattyMeat + "LBs";
         currentDay.text = ResourceManager.Instance._currentDay.ToString();
-        sausageAmount.text = ResourceManager.Instance._currentSausage.ToString();
     }
 }
