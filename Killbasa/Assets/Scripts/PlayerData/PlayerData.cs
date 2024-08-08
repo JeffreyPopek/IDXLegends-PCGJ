@@ -7,6 +7,8 @@ using UnityEngine;
 public class PlayerData : ScriptableObject
 {
     [SerializeField] private int _day;
+    [SerializeField] private int _timesCaught; //Will affect the fine the player gets when they lose a minigame
+    [SerializeField] private float _suspicionMultiplier; //Will affect the difficulty and number of police the player must avoid over a time period.
     [SerializeField] private float _money;
     [SerializeField] private float _lbFatty;
     [SerializeField] private float _lbLean;
@@ -21,13 +23,24 @@ public class PlayerData : ScriptableObject
         get { return _day; }
         set { _day = value; }
     }
+    public int TimesCaught
+    {
+        get { return _timesCaught; }
+        set { _timesCaught = value; }
+    }
     
+    public float Suspicion
+    {
+        get { return _suspicionMultiplier; }
+        set { _suspicionMultiplier = value; }
+    }
+
     public float Money
     {
         get { return _money; }
         set { _money = value; }
     }
-    
+
     public float LBFatty
     {
         get { return _lbFatty; }

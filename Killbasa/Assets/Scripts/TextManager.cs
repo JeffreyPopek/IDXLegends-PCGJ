@@ -13,7 +13,12 @@ public class TextManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI currentDay;
     [SerializeField] private TextMeshProUGUI moneyAmount;
     [SerializeField] private TextMeshProUGUI fattyMeatAmount;
-    [SerializeField] private TextMeshProUGUI sausageAmount;
+    [SerializeField] private TextMeshProUGUI leanMeatAmount;
+    [SerializeField] private TextMeshProUGUI richMeatAmount;
+    [SerializeField] private TextMeshProUGUI boiledSausageAmount;
+    [SerializeField] private TextMeshProUGUI grilledSausageAmount;
+    [SerializeField] private TextMeshProUGUI smokedSausageAmount;
+    [SerializeField] private TextMeshProUGUI dryAgedSausageAmount;
 
     #endregion
 
@@ -37,6 +42,7 @@ public class TextManager : MonoBehaviour
         ResourceManager.Instance._currentDay++;
         ResourceManager.Instance.UpdatePlayerData();
         SceneManager.LoadScene(1);
+        ResourceManager.Instance.ApplyDailyMaintainenceCosts();
     } 
     
     
@@ -51,6 +57,12 @@ public class TextManager : MonoBehaviour
     {
         moneyAmount.text = "$" + ResourceManager.Instance._currentMoney;
         fattyMeatAmount.text = ResourceManager.Instance._LBFattyMeat + "LBs";
+        leanMeatAmount.text = ResourceManager.Instance._LBLeanMeat + "LBs";
+        richMeatAmount.text = ResourceManager.Instance._LBRichMeat + "LBs";
+        boiledSausageAmount.text = ResourceManager.Instance._numBoiledKielbasa + "LBs";
+        grilledSausageAmount.text = ResourceManager.Instance._numGrilledKielbasa+ "LBs";
+        smokedSausageAmount.text = ResourceManager.Instance._numSmokedKielbasa + "LBs";
+        dryAgedSausageAmount.text = ResourceManager.Instance._numDryAgedKielbasa + "LBs";
         currentDay.text = ResourceManager.Instance._currentDay.ToString();
     }
 }

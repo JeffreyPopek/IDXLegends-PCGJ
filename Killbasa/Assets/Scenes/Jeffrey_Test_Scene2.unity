@@ -356,10 +356,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45693d76fba0fc540b5620cc5440d75c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerData: {fileID: 11400000, guid: aa55119fc950e15489368842d1538af4, type: 2}
   _currentDay: 0
   _currentMoney: 0
   _LBFattyMeat: 0
-  _currentSausage: 0
+  _LBLeanMeat: 0
+  _LBRichMeat: 0
+  _numBoiledKielbasa: 0
+  _numGrilledKielbasa: 0
+  _numSmokedKielbasa: 0
+  _numDryAgedKielbasa: 0
 --- !u!4 &459090438
 Transform:
   m_ObjectHideFlags: 0

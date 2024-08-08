@@ -79,4 +79,9 @@ public class ResourceManager : MonoBehaviour
         
         TextManager.Instance.UpdateUI();
     }
+
+    public void ApplyDailyMaintainenceCosts()
+    {
+        _playerData.Money = _currentMoney - 100;
+    }
 }

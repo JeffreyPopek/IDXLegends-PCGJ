@@ -49,4 +49,41 @@ public class DayActionManager : MonoBehaviour
             ResourceManager.Instance.UpdatePlayerData();
         }
     }
+
+
+    //Sell functions:
+    public void SellBoiledKielbasa()
+    {
+        if (ResourceManager.Instance._numBoiledKielbasa > 0)
+        {
+            ResourceManager.Instance._currentMoney += 200;
+            ResourceManager.Instance.UpdatePlayerData();
+        }
+    }
+
+    public void SellGrilledKielbasa()
+    {
+        if (ResourceManager.Instance._numGrilledKielbasa > 0)
+        {
+            ResourceManager.Instance._currentMoney += 200;
+            ResourceManager.Instance.UpdatePlayerData();
+        }
+    }
+    public void SellSmokedKielbasa()
+    {
+        if (ResourceManager.Instance._numSmokedKielbasa > 0)
+        {
+            ResourceManager.Instance._currentMoney += 200;
+            ResourceManager.Instance.UpdatePlayerData();
+        }
+    }
+
+    public void SellDryAgedKielbasa()
+    {
+        if (ResourceManager.Instance._numDryAgedKielbasa > 0)
+        {
+            ResourceManager.Instance._currentMoney += 200;
+            ResourceManager.Instance.UpdatePlayerData();
+        }
+    }
 }
