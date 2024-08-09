@@ -11,22 +11,54 @@ public class KillGameManager : MonoBehaviour
     public float spawnRangeY;
     private float spawnTimer = 0;
     public float spawnTime;
+    public float minSpawnTime;
+    public float maxSpawnTime;
     private float copChance = 0;
+
+    public enum Direction { North, South, East, West }
 
     public GameObject[] spawnPositions;
     public GameObject[] validSpawnPositions;
-
+    
     public enum EnemyType { Fatty, Lean, Rich }
-    public enum Direction { North, South, East, West }
+
+    public EnemyType enemyType;
+
+    public float fattyChance;
+    public float leanChance;
+    public float richChance;
+    
+
+    
+
 
     private void Update()
     {
         spawnTimer += Time.deltaTime;
 
+        
+
         if (spawnTimer > spawnTime)
         {
+            float r = Random.Range(0, 100);
+
+            if(r < fattyChance)
+            {
+                enemyType = EnemyType.Fatty;
+            }
+            else if (r < leanChance + fattyChance)
+            {
+                enemyType = EnemyType.Lean;
+            }
+            else
+            {
+                //remainder is for rich
+                enemyType = EnemyType.Rich;
+            }
+
             SpawnTarget();
             spawnTimer = 0.0f;
+            spawnTime = Random.Range(minSpawnTime, maxSpawnTime);
         }
     }
 
@@ -69,6 +101,7 @@ public class KillGameManager : MonoBehaviour
         KillTarget newTarget = Instantiate(targetPrefab);
         newTarget.transform.position = spawnPoint.transform.position;
         newTarget.manager = this;
+        newTarget.enemyType = this.enemyType;
 
         switch (enemyDirection)
         {
@@ -87,6 +120,27 @@ public class KillGameManager : MonoBehaviour
 
             case Direction.West:
                 newTarget.xDirection= -1;
+                break;
+
+        }
+
+        switch (enemyType)
+        {
+            case (EnemyType.Fatty):
+                newTarget.lifespan = 2.7f;
+                newTarget.movementSpeed = 0;
+                newTarget.transform.position += new Vector3(newTarget.xDirection, newTarget.yDirection, 0) * Random.Range(0f, 2f);
+                break;
+
+            case (EnemyType.Lean):
+                newTarget.lifespan = 2.1f;
+                newTarget.movementSpeed = Random.Range(.8f,1.2f);
+                break;
+
+            case (EnemyType.Rich):
+                newTarget.lifespan = 1.1f;
+                newTarget.movementSpeed = 0;
+                newTarget.transform.position += new Vector3(newTarget.xDirection, newTarget.yDirection, 0) * Random.Range(0f, 2f);
                 break;
 
         }
