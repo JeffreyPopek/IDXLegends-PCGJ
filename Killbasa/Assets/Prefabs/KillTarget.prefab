@@ -102,6 +102,9 @@ MonoBehaviour:
   manager: {fileID: 0}
   lifespan: 1.3
   isCop: 0
+  xDirection: 0
+  yDirection: 0
+  movementSpeed: 1
 --- !u!50 &5354505322155655113
 Rigidbody2D:
   serializedVersion: 4

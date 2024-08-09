@@ -9,6 +9,10 @@ public class KillTarget : MonoBehaviour
     public float lifespan;
     public bool isCop = false;
 
+    public int xDirection;
+    public int yDirection;
+    public float movementSpeed;
+
     private float lifeTimer = 0.0f;
 
     private void Start()
@@ -22,6 +26,8 @@ public class KillTarget : MonoBehaviour
     private void Update()
     {
         lifeTimer += Time.deltaTime;
+
+        transform.position += new Vector3(xDirection, yDirection, 0) * Time.deltaTime * movementSpeed;
 
         if (lifeTimer > lifespan)
             Destroy(gameObject);

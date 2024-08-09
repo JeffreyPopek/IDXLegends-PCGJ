@@ -13,6 +13,12 @@ public class KillGameManager : MonoBehaviour
     public float spawnTime;
     private float copChance = 0;
 
+    public GameObject[] spawnPositions;
+    public GameObject[] validSpawnPositions;
+
+    public enum EnemyType { Fatty, Lean, Rich }
+    public enum Direction { North, South, East, West }
+
     private void Update()
     {
         spawnTimer += Time.deltaTime;
@@ -29,14 +35,61 @@ public class KillGameManager : MonoBehaviour
 
     }
 
+    
     public void SpawnTarget()
     {
-        float spawnX = Random.Range(-spawnRangeX, spawnRangeX);
-        float spawnY = Random.Range(-spawnRangeY, spawnRangeY);
+        int spawnPosition = Random.Range(0,spawnPositions.Length);
+        GameObject spawnPoint = spawnPositions[spawnPosition];
+        SpawnVariables spawnVars = spawnPoint.GetComponent<SpawnVariables>();
+
+        List<Direction> spawnDirections = new List<Direction>();
+        spawnDirections.Clear();
+
+        if(spawnVars.roadNorth)
+        {
+            spawnDirections.Add(Direction.North);
+        }
+        if(spawnVars.roadSouth)
+        {
+            spawnDirections.Add(Direction.South);
+        }
+        if(spawnVars.roadEast)
+        {
+            spawnDirections.Add(Direction.East);
+        }
+        if(spawnVars.roadWest)
+        {
+            spawnDirections.Add(Direction.West);
+        }
+
+        Direction enemyDirection = spawnDirections[Random.Range(0,spawnDirections.Count)];
+
+        
 
         KillTarget newTarget = Instantiate(targetPrefab);
-        newTarget.transform.position = new Vector3(spawnX, spawnY, 0);
+        newTarget.transform.position = spawnPoint.transform.position;
         newTarget.manager = this;
+
+        switch (enemyDirection)
+        {
+            case Direction.North:
+                newTarget.yDirection = 1;
+                //spawnPoint.transform.position += new Vector3(0, Random.Range(0,1), 0);
+                break;
+
+            case Direction.South:
+                newTarget.yDirection = -1;
+                break;
+
+            case Direction.East:
+                newTarget.xDirection = 1;
+                break;
+
+            case Direction.West:
+                newTarget.xDirection= -1;
+                break;
+
+        }
 
         float r = Random.Range(0.0f, 10.0f);
         if (r < copChance)
