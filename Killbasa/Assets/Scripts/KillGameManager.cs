@@ -1,9 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 
 public class KillGameManager : MonoBehaviour
 {
+    [SerializeField] private PlayerData _playerData; //Do you want the variables in playerData visible in this gamemanager? -Jon
+    [SerializeField] private ResourceManager _resourceManager;
+
     public int difficulty;
     public KillTarget targetPrefab;
     public int score = 0;
@@ -27,11 +31,14 @@ public class KillGameManager : MonoBehaviour
     public float fattyChance;
     public float leanChance;
     public float richChance;
+
+
+    //New vars
+    public float lbsGainedPerKill = 100;
+
+    public float caughtBasePenalty = 1000;
+    public float caughtPenaltyMult = 1.5f;
     
-
-    
-
-
     private void Update()
     {
         spawnTimer += Time.deltaTime;
@@ -60,6 +67,12 @@ public class KillGameManager : MonoBehaviour
             spawnTimer = 0.0f;
             spawnTime = Random.Range(minSpawnTime, maxSpawnTime);
         }
+    }
+
+    private void Start()
+    {
+        StartMinigame();
+        TextManager.Instance.UpdateUI();
     }
 
     public void StartMinigame()
@@ -130,21 +143,25 @@ public class KillGameManager : MonoBehaviour
                 newTarget.lifespan = 2.7f;
                 newTarget.movementSpeed = 0;
                 newTarget.transform.position += new Vector3(newTarget.xDirection, newTarget.yDirection, 0) * Random.Range(0f, 2f);
+                Debug.Log("Fatty target spawned");
                 break;
 
             case (EnemyType.Lean):
                 newTarget.lifespan = 2.1f;
                 newTarget.movementSpeed = Random.Range(.8f,1.2f);
+                Debug.Log("Lean target spawned");
                 break;
 
             case (EnemyType.Rich):
                 newTarget.lifespan = 1.1f;
                 newTarget.movementSpeed = 0;
                 newTarget.transform.position += new Vector3(newTarget.xDirection, newTarget.yDirection, 0) * Random.Range(0f, 2f);
+                Debug.Log("Rich target spawned");
                 break;
 
         }
 
+        //Can we change this to work with "suspicion" over multiple days? -Jon
         float r = Random.Range(0.0f, 10.0f);
         if (r < copChance)
         {
@@ -162,16 +179,41 @@ public class KillGameManager : MonoBehaviour
 
     }
 
-    public void TargetClickedGood()
+    private void OnMouseDown() //Reason for this is I felt that each click (including misses) represents a "kill attempt", so suspicion should rise as a result. -Jon
     {
-        score++;
-        Debug.Log("Score: " + score);
+        _playerData.Suspicion += 1;
     }
 
-    public void TargetClickedBad()
+    public void TargetClickedGood(EnemyType eType)
     {
-        score--;
-        Debug.Log("Score: " + score);
+        switch(eType)
+        {
+            case (EnemyType.Fatty):
+                _resourceManager._LBFattyMeat += lbsGainedPerKill;
+                _resourceManager.UpdatePlayerData();
+                //Debug.Log("LBFatty: " + _playerData.LBFatty);
+                break;
 
+            case (EnemyType.Lean):
+                _resourceManager._LBLeanMeat += lbsGainedPerKill;
+                _resourceManager.UpdatePlayerData();
+                //Debug.Log("LBLean: " + _playerData.LBLean);
+                break;
+
+            case (EnemyType.Rich):
+                _resourceManager._LBRichMeat += lbsGainedPerKill;
+                _resourceManager.UpdatePlayerData();
+                //Debug.Log("LBRich: " + _playerData.LBRich);
+                break;
+        }
+    }
+
+    public void TargetClickedBad() //I think this should immediately end the night and apply fines/penalties
+    {
+        _resourceManager._timesCaught++;
+        _resourceManager._currentMoney -= _resourceManager._timesCaught * caughtBasePenalty;
+        _resourceManager.UpdatePlayerData();
+        //TODO have UI that stops game, make player click "End Night" button to go to next day
+        TextManager.Instance.GoToNextDay();
     }
 }

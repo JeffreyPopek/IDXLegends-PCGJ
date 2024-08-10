@@ -48,7 +48,7 @@ public class KillTarget : MonoBehaviour
         if (isCop)
             manager.TargetClickedBad();
         else
-            manager.TargetClickedGood();
+            manager.TargetClickedGood(enemyType);
 
         Destroy(gameObject);
     }

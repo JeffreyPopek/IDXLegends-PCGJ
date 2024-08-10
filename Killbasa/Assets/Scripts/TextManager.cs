@@ -55,14 +55,21 @@ public class TextManager : MonoBehaviour
 
     public void UpdateUI()
     {
-        moneyAmount.text = "$" + ResourceManager.Instance._currentMoney;
-        fattyMeatAmount.text = ResourceManager.Instance._LBFattyMeat + "LBs";
-        leanMeatAmount.text = ResourceManager.Instance._LBLeanMeat + "LBs";
-        richMeatAmount.text = ResourceManager.Instance._LBRichMeat + "LBs";
-        boiledSausageAmount.text = ResourceManager.Instance._numBoiledKielbasa + "LBs";
-        grilledSausageAmount.text = ResourceManager.Instance._numGrilledKielbasa+ "LBs";
-        smokedSausageAmount.text = ResourceManager.Instance._numSmokedKielbasa + "LBs";
-        dryAgedSausageAmount.text = ResourceManager.Instance._numDryAgedKielbasa + "LBs";
-        currentDay.text = ResourceManager.Instance._currentDay.ToString();
+        try //Doing this because there are instances I'm not using all the text variables
+        {
+            moneyAmount.text = "$" + ResourceManager.Instance._currentMoney;
+            fattyMeatAmount.text = ResourceManager.Instance._LBFattyMeat + "LBs";
+            leanMeatAmount.text = ResourceManager.Instance._LBLeanMeat + "LBs";
+            richMeatAmount.text = ResourceManager.Instance._LBRichMeat + "LBs";
+            boiledSausageAmount.text = ResourceManager.Instance._numBoiledKielbasa + "LBs";
+            grilledSausageAmount.text = ResourceManager.Instance._numGrilledKielbasa + "LBs";
+            smokedSausageAmount.text = ResourceManager.Instance._numSmokedKielbasa + "LBs";
+            dryAgedSausageAmount.text = ResourceManager.Instance._numDryAgedKielbasa + "LBs";
+            currentDay.text = ResourceManager.Instance._currentDay.ToString();
+        }
+        catch 
+        {
+            Debug.Log("Missing text boxes");
+        }
     }
 }

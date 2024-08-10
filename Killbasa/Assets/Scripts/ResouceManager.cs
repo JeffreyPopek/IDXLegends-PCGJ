@@ -13,6 +13,8 @@ public class ResourceManager : MonoBehaviour
     
     public int _currentDay;
     public float _currentMoney;
+    public int _timesCaught;
+    public float _suspicion;
     
     // Meats
     public float _LBFattyMeat;
@@ -51,6 +53,8 @@ public class ResourceManager : MonoBehaviour
         // Get data from PlayerData scriptable object
         _currentDay = _playerData.Day;
         _currentMoney = _playerData.Money;
+        _timesCaught = _playerData.TimesCaught;
+        _suspicion = _playerData.Suspicion;
         
         _LBFattyMeat = _playerData.LBFatty;
         _LBLeanMeat = _playerData.LBLean;
@@ -67,6 +71,9 @@ public class ResourceManager : MonoBehaviour
         // Set data in PlayerData scriptable object
         _playerData.Day = _currentDay;
         _playerData.Money = _currentMoney;
+        _playerData.TimesCaught = _timesCaught;
+        _playerData.Suspicion = _suspicion;
+
         
         _playerData.LBFatty = _LBFattyMeat;
         _playerData.LBLean = _LBLeanMeat;
