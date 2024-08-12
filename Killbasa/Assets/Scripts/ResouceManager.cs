@@ -87,6 +87,25 @@ public class ResourceManager : MonoBehaviour
         TextManager.Instance.UpdateUI();
     }
 
+    public void ResetPlayerData()
+    {
+        _currentDay = 0;
+        _currentMoney = 0;
+        _timesCaught = 0;
+        _suspicion = 0;
+
+        _LBFattyMeat = 0;
+        _LBLeanMeat = 0;
+        _LBRichMeat = 0;
+
+        _numBoiledKielbasa = 0;
+        _numGrilledKielbasa = 0;
+        _numSmokedKielbasa = 0;
+        _numDryAgedKielbasa = 0;
+
+        UpdatePlayerData();
+    }
+
     public void ApplyDailyMaintainenceCosts()
     {
         _playerData.Money = _currentMoney - 100;

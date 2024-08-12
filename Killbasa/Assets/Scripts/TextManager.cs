@@ -53,6 +53,12 @@ public class TextManager : MonoBehaviour
         //UpdateUI();
     }
 
+    public void WipeSaveFile()
+    {
+        ResourceManager.Instance.ResetPlayerData();
+        GoToNextDay();
+    }
+
     public void UpdateUI()
     {
         try //Doing this because there are instances I'm not using all the text variables

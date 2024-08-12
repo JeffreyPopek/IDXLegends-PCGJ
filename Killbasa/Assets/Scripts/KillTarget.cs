@@ -25,9 +25,23 @@ public class KillTarget : MonoBehaviour
         if (isCop)
             GetComponent<SpriteRenderer>().color = Color.red;
         else
-            GetComponent<SpriteRenderer>().color = Color.green;
+        {
+            switch (enemyType)
+            {
+                case (EnemyType.Fatty):
+                    GetComponent<SpriteRenderer>().color = Color.cyan;
+                    break;
 
-        
+                case (EnemyType.Lean):
+                    GetComponent<SpriteRenderer>().color = Color.blue;
+                    break;
+
+                case (EnemyType.Rich):
+                    GetComponent<SpriteRenderer>().color = Color.yellow;
+                    break;
+
+            }
+        }      
 
     }
 
