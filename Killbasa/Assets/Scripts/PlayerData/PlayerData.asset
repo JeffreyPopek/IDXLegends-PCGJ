@@ -12,12 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ae861a84b1242f4ca936757430e5317, type: 3}
   m_Name: PlayerData
   m_EditorClassIdentifier: 
-  _day: 6
-  _money: 7956
-  _lbFatty: 9200
-  _lbLean: 10000
-  _lbRich: 10000
-  _boiledKielbasa: 28
+  _day: 10
+  _timesCaught: 0
+  _suspicionMultiplier: 0
+  _money: 500
+  _lbFatty: 200
+  _lbLean: 0
+  _lbRich: 0
+  _boiledKielbasa: 0
   _grilledKielbasa: 0
   _smokedKielbasa: 0
   _dryAgedKielbasa: 0
