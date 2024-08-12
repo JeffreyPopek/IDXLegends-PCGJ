@@ -32,6 +32,11 @@ public class KillGameManager : MonoBehaviour
     public float leanChance;
     public float richChance;
 
+    //AudioFX
+    public AudioSource scream1;
+    public AudioSource scream2;
+    public AudioSource scream3;
+    public AudioSource wrong;
 
     //New vars
     public float lbsGainedPerKill = 100;
@@ -189,18 +194,27 @@ public class KillGameManager : MonoBehaviour
         switch(eType)
         {
             case (EnemyType.Fatty):
+
+                scream1.Play();
+
                 _resourceManager._LBFattyMeat += lbsGainedPerKill;
                 _resourceManager.UpdatePlayerData();
                 //Debug.Log("LBFatty: " + _playerData.LBFatty);
                 break;
 
             case (EnemyType.Lean):
+
+                scream2.Play();
+
                 _resourceManager._LBLeanMeat += lbsGainedPerKill;
                 _resourceManager.UpdatePlayerData();
                 //Debug.Log("LBLean: " + _playerData.LBLean);
                 break;
 
             case (EnemyType.Rich):
+
+                scream3.Play();
+
                 _resourceManager._LBRichMeat += lbsGainedPerKill;
                 _resourceManager.UpdatePlayerData();
                 //Debug.Log("LBRich: " + _playerData.LBRich);
@@ -210,6 +224,8 @@ public class KillGameManager : MonoBehaviour
 
     public void TargetClickedBad() //I think this should immediately end the night and apply fines/penalties
     {
+        wrong.Play();
+
         _resourceManager._timesCaught++;
         _resourceManager._currentMoney -= _resourceManager._timesCaught * caughtBasePenalty;
         _resourceManager.UpdatePlayerData();
