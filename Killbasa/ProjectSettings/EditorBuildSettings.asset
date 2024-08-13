@@ -9,12 +9,12 @@ EditorBuildSettings:
     path: Assets/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
+    path: Assets/Scenes/Title_Scene.unity
+    guid: c60bdb465bcfbf64781c75962e737da2
+  - enabled: 1
     path: Assets/Scenes/Day_Scene.unity
     guid: 839abb7928c562247a2ac88c6df244e3
   - enabled: 1
     path: Assets/Scenes/Night_Scene.unity
     guid: 6c45687960d8b8f459b18e1efa570257
-  - enabled: 1
-    path: Assets/Scenes/Title_Scene.unity
-    guid: c60bdb465bcfbf64781c75962e737da2
   m_configObjects: {}

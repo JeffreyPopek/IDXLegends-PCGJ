@@ -41,22 +41,22 @@ public class TextManager : MonoBehaviour
     {
         ResourceManager.Instance._currentDay++;
         ResourceManager.Instance.UpdatePlayerData();
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(2);
         ResourceManager.Instance.ApplyDailyMaintainenceCosts();
     } 
     
     
     public void GoToNextDay()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(1);
         ResourceManager.Instance._currentDay++;
         //UpdateUI();
     }
 
     public void WipeSaveFile()
     {
-        ResourceManager.Instance.ResetPlayerData();
         GoToNextDay();
+        ResourceManager.Instance.ResetPlayerData();
     }
 
     public void UpdateUI()

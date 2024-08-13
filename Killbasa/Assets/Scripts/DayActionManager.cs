@@ -5,6 +5,9 @@ public class DayActionManager : MonoBehaviour
     public AudioSource makeSFX;
     public AudioSource sellSFX;
 
+    public GameObject moneyParticle;
+    public Camera cam;
+
     public void MakeBoiledKielbasa()
     {
         if (ResourceManager.Instance._LBFattyMeat >= 100)
@@ -34,12 +37,12 @@ public class DayActionManager : MonoBehaviour
     
     public void MakeSmokedKielbasa()
     {
-        if (ResourceManager.Instance._LBFattyMeat >= 20 && ResourceManager.Instance._LBRichMeat >= 80)
+        if (ResourceManager.Instance._LBLeanMeat >= 20 && ResourceManager.Instance._LBRichMeat >= 80)
         {
             makeSFX.Play();
 
-            ResourceManager.Instance._LBFattyMeat -= 20;
-            ResourceManager.Instance._LBFattyMeat -= 80;
+            ResourceManager.Instance._LBLeanMeat -= 20;
+            ResourceManager.Instance._LBRichMeat -= 80;
             ResourceManager.Instance._numSmokedKielbasa++;
             
             ResourceManager.Instance.UpdatePlayerData();
@@ -72,6 +75,8 @@ public class DayActionManager : MonoBehaviour
             ResourceManager.Instance._currentMoney += 200;
             ResourceManager.Instance._numBoiledKielbasa--;
             ResourceManager.Instance.UpdatePlayerData();
+
+            SpawnMoneyParticle();
         }
     }
 
@@ -84,6 +89,8 @@ public class DayActionManager : MonoBehaviour
             ResourceManager.Instance._currentMoney += 200;
             ResourceManager.Instance._numGrilledKielbasa--;
             ResourceManager.Instance.UpdatePlayerData();
+
+            SpawnMoneyParticle();
         }
     }
     public void SellSmokedKielbasa()
@@ -95,6 +102,8 @@ public class DayActionManager : MonoBehaviour
             ResourceManager.Instance._currentMoney += 200;
             ResourceManager.Instance._numSmokedKielbasa--;
             ResourceManager.Instance.UpdatePlayerData();
+
+            SpawnMoneyParticle();
         }
     }
 
@@ -107,6 +116,17 @@ public class DayActionManager : MonoBehaviour
             ResourceManager.Instance._currentMoney += 200;
             ResourceManager.Instance._numDryAgedKielbasa--;
             ResourceManager.Instance.UpdatePlayerData();
+
+            SpawnMoneyParticle();
         }
+    }
+
+    private void SpawnMoneyParticle()
+    {
+        Vector3 spawnPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        spawnPos.y += 0.5f;
+        spawnPos.z = 0;
+
+        Instantiate(moneyParticle, spawnPos, Quaternion.identity);
     }
 }

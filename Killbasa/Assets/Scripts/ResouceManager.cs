@@ -84,7 +84,8 @@ public class ResourceManager : MonoBehaviour
         _playerData.SmokedKielbasa = _numSmokedKielbasa;
         _playerData.DryAgedKielbasa = _numDryAgedKielbasa;
         
-        TextManager.Instance.UpdateUI();
+        if (TextManager.Instance)
+            TextManager.Instance.UpdateUI();
     }
 
     public void ResetPlayerData()
